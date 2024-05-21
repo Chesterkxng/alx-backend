@@ -20,7 +20,7 @@ class LIFOCache(BaseCaching):
             return
 
         if key not in self.cache_data.keys():
-            if (len(self.cache_data.keys()) == BaseCaching.MAX_ITEMS):
+            if (len(self.cache_data.keys()) >= BaseCaching.MAX_ITEMS):
                 if self.last_keyItem != "":
                     print("DISCARD: " + self.last_keyItem)
                     self.cache_data.pop(self.last_keyItem)
