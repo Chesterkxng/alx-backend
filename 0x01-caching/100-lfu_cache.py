@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """ LFUUCache module
 """
-
-BaseCaching = __import__('base_caching').BaseCaching
 from collections import defaultdict, OrderedDict
+BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LFUCache(BaseCaching):
