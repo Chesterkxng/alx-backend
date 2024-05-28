@@ -2,7 +2,8 @@
 """
 Basic Babel setup
 """
-from flask_babel import Babel, _
+import pytz
+from flask_babel import Babel
 from flask import Flask, render_template, request, g
 
 
@@ -48,6 +49,19 @@ def get_locale():
     if header_lang:
         return header_lang
     return Config.BABEL_DEFAULT_LOCALE
+
+
+@babel.timezoneselector
+def get_timezone() -> str:
+    """Retrieves the timezone for a web page.
+    """
+    timezone = request.args.get('timezone', '').strip()
+    if not timezone and g.user:
+        timezone = g.user['timezone']
+    try:
+        return pytz.timezone(timezone).zone
+    except pytz.exceptions.UnknownTimeZoneError:
+        return app.config['BABEL_DEFAULT_TIMEZONE']
 
 
 @app.route("/")
