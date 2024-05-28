@@ -70,6 +70,5 @@ def before_request():
     g.user = get_user()
 
 
-
 if __name__ == '__main__':
     app.run(debug=True)
