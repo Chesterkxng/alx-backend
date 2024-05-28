@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
 """
-First you will setup a basic Flask app in 0-app.py. Create a single
-route and an index.html template that simply outputs “Welcome to Holberton”
-as page title (<title>) and “Hello world” as header (<h1>).
+Basic Babel setup
 """
-from flask import (
-    Flask,
-    render_template,
-    request,
-)
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 app = Flask(__name__)
 
+# Instantiate Babel object
+babel = Babel(app)
 
-# Class configuration
+
+# Config class
 class Config:
     """
     configuration class
@@ -24,21 +21,24 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+# Use Config to set Babel's default locale and timezone
+app.config.from_object(Config)
+
+
 @babel.localeselector
 def get_locale():
-    """ function that get local best languages """
-    return request.accept_languages.best_match(config.LANGUAGES)
+    """
+    determine the best match with our supported languages
+    """
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
-# use defined configuration
-app.config.from_object(Config)
-babel = Babel(app, locale_selector=get_locale)
-
-
-@app.route("/", strict_slashes=False)
-def hello():
-    """ function that return the hello world page"""
-    return render_template('2-index.html')
+@app.route("/")
+def index():
+    """
+    Renders index.html template
+    """
+    return render_template("2-index.html")
 
 
 if __name__ == '__main__':
