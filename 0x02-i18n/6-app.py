@@ -55,7 +55,7 @@ def index():
     """
     Renders index.html template
     """
-    return render_template("6-index.html")
+    return render_template("6-index.html", user=g.user)
 
 
 def get_user():
