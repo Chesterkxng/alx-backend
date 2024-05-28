@@ -13,6 +13,7 @@ from flask_babel import Babel
 app = Flask(__name__)
 babel = Babel(app)
 
+
 # Class configuration
 class Config:
     """
@@ -25,6 +26,7 @@ class Config:
 
 # use defined configuration
 app.config.from_object(Config)
+
 
 @app.route("/", strict_slashes=False)
 def hello():
