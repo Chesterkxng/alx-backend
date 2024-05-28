@@ -24,9 +24,10 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+@babel.localeselector
 def get_locale():
     """ function that get local best languages """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(config.LANGUAGES)
 
 
 # use defined configuration
