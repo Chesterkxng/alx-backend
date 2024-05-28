@@ -11,7 +11,6 @@ from flask import (
 from flask_babel import Babel
 
 app = Flask(__name__)
-babel = Babel(app)
 
 
 # Class configuration
@@ -26,6 +25,7 @@ class Config:
 
 # use defined configuration
 app.config.from_object(Config)
+babel = Babel(app)
 
 
 @app.route("/", strict_slashes=False)
